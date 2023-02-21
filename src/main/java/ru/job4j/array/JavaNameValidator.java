@@ -17,19 +17,16 @@ public class JavaNameValidator {
     }
 
     public static boolean isNameValid(String name) {
-        if (name.isEmpty()) {
+        if (name.isEmpty() || !isLowerLatinLetter(name.codePointAt(0))) {
             return false;
-        } else if (!isLowerLatinLetter(name.codePointAt(0))) {
-            return false;
-        } else {
-            for (int i = 1; i < name.length(); i++) {
-                int charCode = name.codePointAt(i);
-                if (!isSpecialSymbol(charCode)
-                        && !isDigit(charCode)
-                        && !isUpperLatinLetter(charCode)
-                        && !isLowerLatinLetter(charCode)) {
+        }
+        for (int i = 1; i < name.length(); i++) {
+            int charCode = name.codePointAt(i);
+            if (!isSpecialSymbol(charCode)
+                    && !isDigit(charCode)
+                    && !isUpperLatinLetter(charCode)
+                    && !isLowerLatinLetter(charCode)) {
                     return false;
-                }
             }
         }
         return true;
